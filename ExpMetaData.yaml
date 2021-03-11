@@ -1,0 +1,18 @@
+
+
+# Metadata from wind tunnel, working path and h5 file
+
+# Base color used in exp.
+BASE_COLOR: 'white'
+
+# Path where outputs must be stored
+IN_PATH: 'D:/DataFlydra/MosquitoProject/INPUT_Data/FLYDRA_Trajectories_white_black/'
+OUT_PATH: 'D:/DataFlydra/MosquitoProject/OUTPUT_Graphs/'
+
+# Dataset in h5 file to work with
+DATASET: 'kalman_estimates'
+
+# Wind Tunnel dimension limits
+LIM_X: 0.9144
+LIM_Y: 0.3048
+LIM_Z: 0.6096 
