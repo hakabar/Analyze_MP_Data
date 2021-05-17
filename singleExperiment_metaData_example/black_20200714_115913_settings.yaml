@@ -1,0 +1,25 @@
+!!python/object:__main__.Exp_Info
+clrBASE: white
+clrTEST: black
+expDate: '20200714_115913'
+fileName: 20200714_115913.mainbrain.h5
+gender: f
+lux: 100
+posClrBASE:
+- '0.48'
+- '0.09'
+- '0.01'
+posClrTEST:
+- '0.48'
+- '-0.09'
+- '0.01'
+posOdor:
+- '0.15'
+- '0'
+- '0.20'
+ts_1_StartExp: 1594753183
+ts_2_CO2: 1594756783
+ts_3_PostCO2: 1594760383
+ts_4_EndExp: 1594763984
+type: op1R-op2G
+

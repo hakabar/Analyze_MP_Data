@@ -1,0 +1,23 @@
+!!python/object:__main__.Exp_Info
+clrBASE: white
+clrTEST: GwT2
+expDate: '20200701_081701'
+fileName: 20200701_081701.mainbrain.h5
+gender: f
+posClrBASE:
+- '0.48'
+- '0.09'
+- '0.01'
+posClrTEST:
+- '0.48'
+- '-0.09'
+- '0.01'
+posOdor:
+- '0.15'
+- '0'
+- '0.20'
+ts_1_StartExp: 1593616639
+ts_2_CO2: 1593620239
+ts_3_PostCO2: 1593623839
+ts_4_EndExp: 1593627440
+type: wt
