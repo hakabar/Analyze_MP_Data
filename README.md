@@ -64,7 +64,7 @@ NOTE: To run these scripts you need the following:
 	- logConfig.yaml: File logging configuration. It can be modified if you want to plot more or less information in the .log file.
 
 2. INPUT FILES: Each experiment must have the following files in a computer’s folder: 
- - Experiment metadata as .yaml (timestamps, test color used, and cues’ (visual/odor) positions) 
+ - Experiment metadata as .yaml (timestamps, test color used, and cues’ (visual/odor) positions). Check examples in folder: /singleExperiment_metaData_example
  - Flydra file for the experiment as .h5 file
 
 and It will generate the following OUTPUT FILES:
