@@ -1,0 +1,43 @@
+!!python/object:__main__.Exp_Info
+clrBASE: white
+# Color used as TEST color
+clrTEST: BVT2
+# Date_hour when the experiment was done (in '')				
+expDate: '20200602_131936'
+# Name of the mainbrain.h5 file for the experiment impacted by this settings
+fileName: 20200602_131936.mainbrain.h5
+# Gender of the mosquitoes (m/f)
+gender: f
+
+posClrBASE:
+# Position X axis BASE cue
+- '0.48'
+# Position Y axis BASE cue
+- '0.09'
+# Position Z axis BASE cue
+- '0.01'
+posClrTEST:
+# Position X axis TEST cue
+- '0.48'
+# Position Y axis TEST cue
+- '-0.09'
+# Position Z axis TEST cue
+- '0.01'
+posOdor:
+# Position X axis ODOR source
+- '0.15'
+# Position Y axis ODOR source
+- '0'
+# Position Z axis ODOR source
+- '0.20'
+
+# START Experiment (odor= AIR)
+ts_1_StartExp: 1591129193
+# START CO2 as odor Timestamp
+ts_2_CO2: 1591132793
+# STOP CO2  as odor Timestamp (odor= AIR)
+ts_3_PostCO2: 1591136394
+# STOP Experiment (odor= AIR)
+ts_4_EndExp: 1591139994
+# Type of mosquitoes
+type: wt
