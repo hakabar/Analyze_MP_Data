@@ -6,11 +6,12 @@
 BASE_COLOR: 'white'
 
 # Path where outputs must be stored. These paths and folders must exist!
-#IN_PATH: 'D:/DataFlydra/MosquitoProject/INPUT_Data/FLYDRA_Trajectories_white_black/'
-#OUT_PATH: 'D:/DataFlydra/MosquitoProject/OUTPUT_Graphs/exp_white_black/'
-IN_PATH: 'D:/DataFlydra/MosquitoProject/INPUT_Data/FLYDRA_Trajectories_AnStephensi_forPaper/'
-OUT_PATH: 'D:/DataFlydra/MosquitoProject/OUTPUT_Graphs/exp_AnStephensi_for_paper/'
-OUT_FOLDER: '_TEST_exp_AnStephensi_red/'
+#IN_PATH: 'Path/to/your/INPUT_Data/'
+IN_PATH: 'Path/to/your/INPUT_Data/'
+#OUT_PATH: 'Path/to/your/OUTPUT_Data/'
+OUT_PATH: 'Path/to/your/OUTPUT_Data/'
+#OUT_FOLDER: 'OutputFolderName/'
+OUT_FOLDER: 'OutputFolderName/'
 
 # Dataset in h5 file to work with
 DATASET: 'kalman_estimates'
@@ -29,5 +30,4 @@ ODOR: 2   # 1= AIR 2= CO2 3= PostCO2
 NORM: 0.0001 #0.00008
 # Grouping exp per TEST CUE POSITION (Positive (Pve) or Negative (Nve)) and set a name accordingly 
 GRP_BY: 'Pve'
-HM_GRP_NAME: 'hm_anSteph_R-HUE_Grouped'
-#HM_GRP_NAME: 'hm_wt_2whiteCues_Grouped'
+HM_GRP_NAME: 'NameForTheGroupedHeatMapsImage'
