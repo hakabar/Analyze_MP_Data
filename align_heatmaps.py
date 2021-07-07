@@ -141,7 +141,7 @@ def generate_grp_heatmap_for_dataAligned(xVal, yVal, zVal, stimVal, option, ct, 
 	#heatmaps file naming format: 'hm_date_bc_tc_{1-3}_od
 	try:
 		figName= figName+'_'+stim+'_'+str(topValNorm)+'.png'
-		outputPath= metaData['OUT_PATH']+'python_heatmaps/'
+		outputPath= metaData['OUT_PATH']+metaData['OUT_FOLDER']
 		fig.savefig(outputPath+figName, dpi=600)
 		print('  -Heatmap: %s saved in path: %s'%(figName,outputPath))
 	except:
