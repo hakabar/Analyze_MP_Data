@@ -184,7 +184,7 @@ class Exp_Info:
 		#heatmaps file naming format: 'hm_date_bc_tc_{1-3}_od
 		try:
 			figName= 'hm_%s_%s_vs_%s_%s_%s.png'%(self.expDate, self.clrBASE,self.clrTEST, option, stim)
-			outputPath= metaData['OUT_PATH']+'python_heatmaps/'
+			outputPath= metaData['OUT_PATH']+metaData['OUT_FOLDER']
 			fig.savefig(outputPath+figName, dpi= 600)
 		#	logger.info('  -Heatmap: %s saved in path: %s'%(figName,outputPath))
 			print('img %s savd in: %s'%(figName,outputPath))
@@ -255,7 +255,7 @@ class Exp_Info:
 		#heatmaps file naming format: 'hm_date_bc_tc_{1-3}_od
 		try:
 			figName= 'hm_%s_%s_%s_vs_%s_%s_%s.png'%(self.type, self.expDate, self.clrBASE,self.clrTEST, option, stim)
-			outputPath= metaData['OUT_PATH']+'python_heatmaps/'
+			outputPath= metaData['OUT_PATH']+metaData['OUT_FOLDER']
 			fig.savefig(outputPath+figName, dpi= 600)
 			#logger.info('  -Heatmap: %s saved in path: %s'%(figName,outputPath))
 		except Exception as e:

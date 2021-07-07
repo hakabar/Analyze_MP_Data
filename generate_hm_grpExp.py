@@ -72,80 +72,10 @@ def load_exp_data(exp, metaData):
 
 
 
-
-
-
-
-
-def generate_heatmap_for_group(xVal, yVal, zVal, stimVal, option, ct, cb, metaData, figName):
+def generate_heatmap_for_group(xVal, yVal, zVal, ct, cb, metaData, figName):
 	# create heatmap
-	if (option == 1): stim= 'AIR'
-	elif (option == 2): stim='CO2'
-	else: stim= 'PostCO2'
-
-	odorIndex= np.where(stimVal == option)
-
-	nbins= (600,200)
-	heatmapXY, xedges, yedges= np.histogram2d(xVal[odorIndex], yVal[odorIndex], bins=nbins)
-	extentXY= [xedges[0], xedges[-1], yedges[-1], yedges[0]]
-	heatmapXZ,xedges, yedges = np.histogram2d(xVal[odorIndex], zVal[odorIndex], bins=nbins)
-	extentXZ= [xedges[0], xedges[-1], yedges[-1], yedges[0]]
-	
-	# The height of each bar is the relative number of observations, 
-	# (Number of observations in bin / Total number of observations). The sum of the bar heights is 1.
-	topValNorm=	metaData['NORM']	#0.00008	#0.0001 #
-	normHeatmXY= np.empty(nbins, float)
-	normHeatmXZ= np.empty(nbins, float)
-	countsSumXY= np.sum(heatmapXY)
-	countsSumXZ= np.sum(heatmapXZ)
-	for i in range(nbins[0]):
-		for j in range(nbins[1]):
-#				print('i: %s - j:%s'%(i,j))
-			normHeatmXY[i][j] = float(heatmapXY[i][j]) / countsSumXY 
-			normHeatmXZ[i][j] = float(heatmapXZ[i][j]) / countsSumXZ 
-	normHeatmXY= np.transpose(normHeatmXY)
-	normHeatmXZ= np.transpose(normHeatmXZ)
-	
-	#plot heatmap
-	fig, hm= plt.subplots(nrows=2,ncols=1)
-	hm[0].set_title('heatmap %s vs %s x-y axis with stim= %s'%(ct, cb, stim))
-	hm[0].set_xlabel('X axis')
-	hm[0].set_ylabel('Y axis')
-	val= hm[0].imshow(normHeatmXY, vmin=0, vmax=topValNorm, extent= extentXY)
-	hm[0].invert_yaxis()
-	#hm[0].set_xlim([-LIM_X, LIM_X])
-	#hm[0].set_ylim([-LIM_Y, LIM_Y])
-	fig.colorbar(val, ax=hm[0])
-
-	hm[1].set_title('heatmap %s vs %s x-z axis with stim= %s'%(ct, cb, stim))
-	hm[1].set_xlabel('X axis')
-	hm[1].set_ylabel('Z axis')
-	val2= hm[1].imshow(normHeatmXZ, vmin=0, vmax=topValNorm,  extent= extentXZ)
-	hm[1].invert_yaxis()
-	hm[1].set_ylim([0,0.6])		
-	fig.colorbar(val2, ax=hm[1])
-
-	#If you want to show the image uncomment this line
-	#plt.show()
-
-	#Save figure
-	#heatmaps file naming format: 'hm_date_bc_tc_{1-3}_od
-	try:
-		figName= figName+'_'+stim+'_'+str(topValNorm)+'.png'
-		outputPath= metaData['OUT_PATH']+'heatmaps/python_heatmaps/'
-		fig.savefig(outputPath+figName, dpi=600)
-		print('  -Heatmap: %s saved in path: %s'%(figName,outputPath))
-	except:
-		print('  -ERROR! while saving img: %s in path: %s'%(figName,outputPath))
-
-	#CLose figure
-	plt.close(fig)
-
-
-def generate_heatmap_for_group_2(xVal, yVal, zVal, stimVal, option, ct, cb, metaData, figName):
-	# create heatmap
-	if (option == 1): stim= 'AIR'
-	elif (option == 2): stim='CO2'
+	if (metaData['ODOR'] == 1): stim= 'AIR'
+	elif (metaData['ODOR'] == 2): stim='CO2'
 	else: stim= 'PostCO2'
 
 	nbins= (600,200)
@@ -192,7 +122,7 @@ def generate_heatmap_for_group_2(xVal, yVal, zVal, stimVal, option, ct, cb, meta
 	#heatmaps file naming format: 'hm_date_bc_tc_{1-3}_od
 	try:
 		figName= figName+'_'+stim+'_'+str(topValNorm)+'.png'
-		outputPath= metaData['OUT_PATH']+'python_heatmaps/'
+		outputPath= metaData['OUT_PATH']+metaData['OUT_FOLDER'] #old output folder for heatmaps= python_heatmaps/'
 		fig.savefig(outputPath+figName, dpi=600)
 		print('  -Heatmap: %s saved in path: %s'%(figName,outputPath))
 	except:
@@ -216,6 +146,8 @@ if __name__== '__main__':
 	tmpY= []
 	tmpZ=[]
 	tmpStim=[]
+	ctrlBase=''
+	ctrlTest=''
 	for i, fname in enumerate(filesList):
 		#t1=time.time()
 		expList.append(load_expConfig_only(fname, expMetaData))
@@ -225,6 +157,9 @@ if __name__== '__main__':
 
 			if ('-' in expList[i].posClrTEST[1]):
 					expList[i].Y_List = expList[i].Y_List*(-1)
+					expList[i].posClrTEST[1]= str(float(expList[i].posClrTEST[1])*(-1))
+					expList[i].posClrBASE[1]= str(float(expList[i].posClrBASE[1])*(-1))
+
 
 		elif ('Nve' in expMetaData['GRP_BY']):
 			# If the TEST Cue is in the POSITIVE Y axis, load the experiment and group it to the other exp with TEST Cue in similar position
@@ -232,7 +167,20 @@ if __name__== '__main__':
 
 			if ('-' not in expList[i].posClrTEST[1]):
 					expList[i].Y_List = expList[i].Y_List*(-1)
+					expList[i].posClrTEST[1]= str(float(expList[i].posClrTEST[1])*(-1))
+					expList[i].posClrBASE[1]= str(float(expList[i].posClrBASE[1])*(-1))
 
+
+		#Check that the test and base color cues are equals in all the files that we are grouping
+		if i>0:
+			if (ctrlBase != expList[i].clrBASE) or (ctrlTest != expList[i].clrTEST):
+				# If there is an issue with the color values between intial file and ith file, check both files
+				print(' * ERROR for Base or Test colors defined in settings (.yaml) files for exp on dates %s and %s. '%(expList[0].expDate, expList[i].expDate))
+				print('   * Please Check these files for errors. This script wil stop now.')
+				exit()
+		else:
+			ctrlBase= expList[i].clrBASE
+			ctrlTest= expList[i].clrTEST
 
 		option= expMetaData['ODOR']	#option 2 == only CO2
 		odorIndex= np.where(expList[i].stim_List == option)
@@ -249,6 +197,6 @@ if __name__== '__main__':
 	imgTitle= expMetaData['HM_GRP_NAME']
 	
 	#imgTitle= 'hm_grouped_posNve_black_vs_white'
-	#generate_heatmap_for_group_2(tmpX, tmpY, tmpZ, tmpStim, 2, 'black', 'white', expMetaData, imgTitle)
-	generate_heatmap_for_group_2(tmpX, tmpY, tmpZ, tmpStim, expMetaData['ODOR'], 'black', 'white', expMetaData, imgTitle)
+	#generate_heatmap_for_group(tmpX, tmpY, tmpZ, tmpStim, 2, 'black', 'white', expMetaData, imgTitle)
+	generate_heatmap_for_group(tmpX, tmpY, tmpZ, 'black', 'white', expMetaData, imgTitle)
 	print('current status')
